@@ -1,0 +1,41 @@
+﻿@model EventEasePoe.Models.Venue
+
+@{
+    ViewData["Title"] = "Create Venue";
+}
+
+<h1>Create Venue</h1>
+
+<h4>Venue</h4>
+<hr />
+
+@using (Html.BeginForm("Create", "Venues", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label asp-for="VenueName" class="control-label"></label>
+        <input asp-for="VenueName" class="form-control" />
+        <span asp-validation-for="VenueName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Location" class="control-label"></label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VenueCapcity" class="control-label"></label>
+        <input asp-for="VenueCapcity" class="form-control" />
+        <span asp-validation-for="VenueCapcity" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="imageFile">Venue Image</label>
+        <input type="file" name="imageFile" id="imageFile" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

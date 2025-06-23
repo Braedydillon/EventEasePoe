@@ -1,0 +1,64 @@
+﻿@model IEnumerable<EventEasePoe.Models.Booking>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form asp-controller="Bookings" asp-action="Index">
+    <p>
+        <label>Booking ID or Name : <input type="text" name="SearchString" /></label>
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+<a asp-action="AdvancedSearch" class="btn btn-success">Advanced Search</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Event)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EventBooking)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.EventName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Venue.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventBooking)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BookingID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.BookingID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BookingID">Delete</a> |
+                    <a asp-action="BookingDetails" asp-route-id="@item.BookingID">BookingDetails</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

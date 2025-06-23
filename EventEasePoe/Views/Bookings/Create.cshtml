@@ -1,0 +1,48 @@
+﻿@model EventEasePoe.Models.Booking
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Booking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="VenueID" class="control-label">Venue Name:</label>
+                @Html.DropDownListFor(m => m.VenueID, ViewBag.Venues as SelectList, "Select a Venue", new { @class = "form-control" })
+                <span asp-validation-for="VenueID" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Event Name:</label>
+                @Html.DropDownListFor(m => m.EventID, ViewBag.Events as SelectList, "Select an Event", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EventBooking" class="control-label"></label>
+                <input asp-for="EventBooking" class="form-control" />
+                <span asp-validation-for="EventBooking" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EventEasePoe.Models.Booking>
+
+@{
+    ViewData["Title"] = "Advanced Search";
+}
+
+<h2>Advanced Booking Search</h2>
+
+<form asp-action="AdvancedSearch" method="get">
+    <div class="form-group">
+        <label>Search (Event Type)</label>
+        <input type="text" name="searchString" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Venue</label>
+        <select name="venueId" class="form-control" asp-items="@(ViewData["Venues"] as SelectList)">
+            <option value="">All Venues</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Start Date</label>
+        <input type="date" name="startDate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>End Date</label>
+        <input type="date" name="endDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Venue Availability</label>
+        <select name="venueAvailability" class="form-control">
+            <option value="">All</option>
+            <option value="available">Available</option>
+            <option value="notavailable">Not Available</option>
+        </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary mt-2">Search</button>
+</form>
+
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Event Name</th>
+            <th>Venue</th>
+            <th>Event Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.BookingID</td>
+                <td>@item.Event?.EventName</td>
+                <td>@item.Venue?.VenueName</td>
+                <td>@item.Event?.EventDate.ToShortDateString()</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.BookingID" class="btn btn-info btn-sm">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
