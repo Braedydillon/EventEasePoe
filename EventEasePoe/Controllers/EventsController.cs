@@ -38,7 +38,7 @@ namespace EventEasePart2Sub.Controllers
             {
                 events = events.Where(s => s.EventName!.ToUpper().Contains(searchString.ToUpper()));
             }
-
+             
             return View(await events.ToListAsync());
         }
 
